@@ -353,6 +353,7 @@ namespace Mocr
 
         private void buttonEditImg_Click(object sender, EventArgs e)
         {
+            if(buttonEditImg.Enabled==false)return;
             if (currentImage == null)
             {
                 MessageBox.Show("√ª”–‘ÿ»ÎÕºœÒ°£", "Mocr", MessageBoxButtons.OK, MessageBoxIcon.Warning);

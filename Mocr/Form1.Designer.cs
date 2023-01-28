@@ -147,6 +147,7 @@
             // 
             // buttonEditImg
             // 
+            this.buttonEditImg.Enabled = false;
             this.buttonEditImg.Location = new System.Drawing.Point(638, 77);
             this.buttonEditImg.Name = "buttonEditImg";
             this.buttonEditImg.Size = new System.Drawing.Size(150, 35);
