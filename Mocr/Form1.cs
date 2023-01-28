@@ -7,6 +7,7 @@ using System.Windows.Forms.VisualStyles;
 using System.Drawing.Imaging;
 using Newtonsoft.Json.Linq;
 using System.Text;
+using System.IO;
 
 namespace Mocr
 {
@@ -201,7 +202,7 @@ namespace Mocr
         {
             if (running) return;
             if (e.Modifiers == Keys.None && e.KeyCode == Keys.F7)
-            { 
+            {
                 buttonLoadClipboardImg_Click(this, null);
                 e.SuppressKeyPress = false;
             }
@@ -224,7 +225,22 @@ namespace Mocr
 
         private void buttonLoadFileImg_Click(object sender, EventArgs e)
         {
-
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.CheckFileExists = true;
+            openFileDialog.Filter = "图像文件|" + String.Join(';', SUPPORTED_IMGFORMATS);
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string path = openFileDialog.FileName;
+                if (String.IsNullOrWhiteSpace(path)) { return; }
+                if (!File.Exists(path)) { return; }
+                string ext = Path.GetExtension(path).ToLower();
+                if (!SUPPORTED_IMGFORMATS.Contains("*" + ext))
+                {
+                    MessageBox.Show("不支持加载该类型图像。\n目前仅支持BMP、GIF、JPG、PNG、TIFF。", "Mocr", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                LoadImgFromFile(path);
+            }
         }
 
         string[] LANGID_STR =
@@ -242,7 +258,7 @@ namespace Mocr
             "RUS"
         };
 
-        bool running=false;
+        bool running = false;
 
         private void buttonRun_Click(object sender, EventArgs e)
         {
@@ -255,7 +271,7 @@ namespace Mocr
                 return;
             }
 
-            running= true;
+            running = true;
             buttonRun.Enabled = false;
 
             MemoryStream memoryStream = new MemoryStream();
@@ -330,24 +346,61 @@ namespace Mocr
             }
             finally
             {
-                running= false;
+                running = false;
                 buttonRun.Enabled = true;
             }
         }
 
         private void buttonEditImg_Click(object sender, EventArgs e)
         {
-
+            if (currentImage == null)
+            {
+                MessageBox.Show("没有载入图像。", "Mocr", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            FormEditImg editForm = new FormEditImg();
+            editForm.inimg = (Image)currentImage.Clone();
+            if (editForm.ShowDialog() == DialogResult.OK)
+            {
+                currentImage= editForm.inimg;
+                pictureBox1.Image = currentImage;
+            }
         }
 
         void LoadImgFromFile(string filename)
         {
-
+            try
+            {
+                currentImage = Image.FromFile(filename);
+                pictureBox1.Image = currentImage;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("从文件载入图像发生异常：" + ex.Message, "Mocr", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(ex.ToString());
+            }
         }
+
+        string[] SUPPORTED_IMGFORMATS = {
+            "*.bmp",
+            "*.gif",
+            "*.jpg",
+            "*.jpeg",
+            "*.png",
+            "*.tiff"
+        };
 
         private void label1_DragDrop(object sender, DragEventArgs e)
         {
             string path = (e.Data.GetData(DataFormats.FileDrop) as Array).GetValue(0).ToString();
+            if (String.IsNullOrWhiteSpace(path)) { return; }
+            if (!File.Exists(path)) { return; }
+            string ext = Path.GetExtension(path).ToLower();
+            if (!SUPPORTED_IMGFORMATS.Contains("*" + ext))
+            {
+                MessageBox.Show("不支持加载该类型图像。\n目前仅支持BMP、GIF、JPG、PNG、TIFF。", "Mocr", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             LoadImgFromFile(path);
         }
 

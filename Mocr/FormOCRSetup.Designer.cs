@@ -95,6 +95,7 @@
             // 
             this.textBoxSecKey.Location = new System.Drawing.Point(91, 74);
             this.textBoxSecKey.Name = "textBoxSecKey";
+            this.textBoxSecKey.PasswordChar = '-';
             this.textBoxSecKey.Size = new System.Drawing.Size(181, 23);
             this.textBoxSecKey.TabIndex = 4;
             // 

@@ -56,7 +56,7 @@
             this.buttonBaiduApi.Location = new System.Drawing.Point(515, 83);
             this.buttonBaiduApi.Name = "buttonBaiduApi";
             this.buttonBaiduApi.Size = new System.Drawing.Size(117, 29);
-            this.buttonBaiduApi.TabIndex = 5;
+            this.buttonBaiduApi.TabIndex = 6;
             this.buttonBaiduApi.Text = "百度API接入";
             this.buttonBaiduApi.UseVisualStyleBackColor = true;
             this.buttonBaiduApi.Click += new System.EventHandler(this.buttonBaiduApi_Click);
@@ -130,7 +130,7 @@
             this.buttonRun.Location = new System.Drawing.Point(638, 12);
             this.buttonRun.Name = "buttonRun";
             this.buttonRun.Size = new System.Drawing.Size(150, 59);
-            this.buttonRun.TabIndex = 6;
+            this.buttonRun.TabIndex = 7;
             this.buttonRun.Text = "识别\r\n（F5）";
             this.buttonRun.UseVisualStyleBackColor = true;
             this.buttonRun.Click += new System.EventHandler(this.buttonRun_Click);
@@ -150,7 +150,7 @@
             this.buttonEditImg.Location = new System.Drawing.Point(638, 77);
             this.buttonEditImg.Name = "buttonEditImg";
             this.buttonEditImg.Size = new System.Drawing.Size(150, 35);
-            this.buttonEditImg.TabIndex = 7;
+            this.buttonEditImg.TabIndex = 8;
             this.buttonEditImg.Text = "修剪图像（F6）";
             this.buttonEditImg.UseVisualStyleBackColor = true;
             this.buttonEditImg.Click += new System.EventHandler(this.buttonEditImg_Click);
@@ -185,7 +185,7 @@
             this.comboBox1.Location = new System.Drawing.Point(527, 53);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(87, 25);
-            this.comboBox1.TabIndex = 4;
+            this.comboBox1.TabIndex = 5;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // groupBox1
@@ -242,7 +242,7 @@
             this.label2.Location = new System.Drawing.Point(515, 33);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(80, 17);
-            this.label2.TabIndex = 8;
+            this.label2.TabIndex = 4;
             this.label2.Text = "标准模式语言";
             // 
             // Form1
@@ -266,7 +266,7 @@
             this.MaximumSize = new System.Drawing.Size(816, 661);
             this.MinimumSize = new System.Drawing.Size(816, 661);
             this.Name = "Form1";
-            this.Text = "M-ocr";
+            this.Text = "Mocr";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
